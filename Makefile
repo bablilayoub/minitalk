@@ -3,6 +3,7 @@ CFLASG = -Wall -Wextra -Werror
 
 all: client server
 
+
 client: client.c $(LIBS)
 	cc $(CFLASG) client.c $(LIBS) -o client
 
