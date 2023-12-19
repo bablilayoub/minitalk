@@ -1,15 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_print_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 17:23:22 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/19 19:20:56 by abablil          ###   ########.fr       */
+/*   Created: 2023/11/06 21:32:48 by abablil           #+#    #+#             */
+/*   Updated: 2023/11/24 15:26:02 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include "includes/ft_printf/ft_printf.h"
-#include "includes/libft/libft.h"
+#include "ft_printf.h"
+
+int	ft_print_char(char c)
+{
+	return (write(1, &c, 1));
+}

@@ -1,15 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   is_rule.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 17:23:22 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/19 19:20:56 by abablil          ###   ########.fr       */
+/*   Created: 2023/11/06 21:55:39 by abablil           #+#    #+#             */
+/*   Updated: 2023/11/28 14:06:26 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include "includes/ft_printf/ft_printf.h"
-#include "includes/libft/libft.h"
+#include "ft_printf.h"
+
+static char	in_array(char c)
+{
+	char	*rules;
+
+	rules = "cspdiuxX%";
+	while (*rules)
+	{
+		if (*rules == c)
+			return (c);
+		rules++;
+	}
+	return ('\0');
+}
+
+char	is_rule(char const *str, int *i)
+{
+	if (str[*i] == '%')
+	{
+		(*i)++;
+		return (in_array(str[*i]));
+	}
+	return ('\0');
+}

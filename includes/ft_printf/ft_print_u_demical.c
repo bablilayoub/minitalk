@@ -1,15 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_print_u_demical.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 17:23:22 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/19 19:20:56 by abablil          ###   ########.fr       */
+/*   Created: 2023/11/07 15:42:28 by abablil           #+#    #+#             */
+/*   Updated: 2023/11/22 17:15:48 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include "includes/ft_printf/ft_printf.h"
-#include "includes/libft/libft.h"
+#include "ft_printf.h"
+
+static void	handle_u_decimal(unsigned int n, int *total)
+{
+	if (n >= 10)
+		handle_u_decimal(n / 10, total);
+	*(total) += ft_print_char(n % 10 + '0');
+}
+
+int	ft_print_u_demical(unsigned int n)
+{
+	int	total;
+
+	total = 0;
+	handle_u_decimal(n, &total);
+	return (total);
+}
