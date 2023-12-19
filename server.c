@@ -6,17 +6,29 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 19:31:10 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/18 20:14:16 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/19 15:42:12 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void handle_signal(int signal)
+void handle_signal(int signal, siginfo_t *info, void *context)
 {
-	static unsigned char buff;
-	static int i;
+	static unsigned char	buff;
+	static pid_t			new_pid;
+	static pid_t			client_pid;
+	static int				i;
 
+	(void)context;
+	if (!client_pid)
+		client_pid = info->si_pid;
+	new_pid = info->si_pid;
+	if (new_pid != client_pid)
+	{
+		client_pid = new_pid;
+		buff = 0;
+		i = 0;
+	}
 	buff |= (signal == SIGUSR1);
 	i++;
 	if (i == 8)
@@ -28,8 +40,7 @@ void handle_signal(int signal)
 	else
 		buff <<= 1;
 }
-
-int main(void)
+void print_server()
 {
 	ft_printf("   _____ __________ _    ____________ \n");
 	ft_printf("  / ___// ____/ __ \\ |  / / ____/ __ \\\n");
@@ -37,12 +48,17 @@ int main(void)
 	ft_printf(" ___/ / /___/ _, _/| |/ / /___/ _, _/ \n");
 	ft_printf("/____/_____/_/ |_| |___/_____/_/ |_|  \n\n");
 	ft_printf("\033[30m\033[102m RUNNING \033[0m \033[92mServer is listening at PID: \033[93m%d\n\033[97m", getpid());
+}
 
-	struct sigaction action;
+int main(void)
+{
+	struct sigaction	action;
 
-	action.sa_handler = &handle_signal;
-	action.sa_flags = 0;
+	action.sa_sigaction = &handle_signal;
+	action.sa_flags = SA_SIGINFO;
 
+	print_server();
+	
 	sigaction(SIGUSR2, &action, NULL);
 	sigaction(SIGUSR1, &action, NULL);
 

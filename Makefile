@@ -1,13 +1,15 @@
 LIBS = ./includes/libftprintf.a ./includes/libft.a
 CFLASG = -Wall -Wextra -Werror
+NAME = minitalk
 
-all: client server
+$(NAME): client server
 
+all: $(NAME)
 
-client: client.c $(LIBS)
+client: client.c
 	cc $(CFLASG) client.c $(LIBS) -o client
 
-server: server.c $(LIBS)
+server: server.c
 	cc $(CFLASG) server.c $(LIBS) -o server
 
 clean:
