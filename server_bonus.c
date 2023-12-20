@@ -6,7 +6,7 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:51:32 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/20 16:00:34 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/20 21:08:19 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	print_server(void)
 	ft_printf("%s ___/ / /___/ _, _/| |/ / /___/ _, _/ \n", LIGHT_BLUE);
 	ft_printf("%s/____/_____/_/ |_| |___/_____/_/ |_|  \n\n", LIGHT_BLUE);
 	ft_printf("%s RUNNING %s Server is listening at PID: %s %d \n%s",
-		BG_GREEN, WHITE, BG_LIGHT_BLUE, getpid(), WHITE);
+		BG_GREEN, WHITE, BG_GREEN, getpid(), WHITE);
 }
 
 int	main(void)
