@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 19:30:59 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/20 17:59:43 by abablil          ###   ########.fr       */
+/*   Created: 2023/12/19 19:51:25 by abablil           #+#    #+#             */
+/*   Updated: 2023/12/20 17:58:49 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 void	print_client(void)
 {
@@ -56,6 +56,13 @@ int	send_signal(int pid, unsigned char character)
 	return (1);
 }
 
+void	send_message(int sig)
+{
+	(void)sig;
+	print_client();
+	ft_printf("%s DONE %s Message recived from server\n", BG_GREEN, WHITE);
+}
+
 int	main(int total, char **args)
 {
 	int		i;
@@ -67,6 +74,7 @@ int	main(int total, char **args)
 		server_pid = ft_atoi(args[1]);
 		if (!server_pid)
 			send_error("\033[30m\033[101m ERROR \033[0m\033[97m Invalide PID");
+		signal(SIGUSR1, &send_message);
 		while (args[2][i])
 		{
 			send_signal(server_pid, args[2][i]);

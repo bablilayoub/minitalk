@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   minitalk_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 17:23:22 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/20 15:53:55 by abablil          ###   ########.fr       */
+/*   Created: 2023/12/19 20:23:34 by abablil           #+#    #+#             */
+/*   Updated: 2023/12/20 16:00:02 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,12 @@
 #define BG_RED "\033[30m\033[101m"
 #define BG_GREEN "\033[30m\033[102m"
 #define BG_YELLOW "\033[30m\033[103m"
+
+struct	s_info
+{
+	unsigned char	buff;
+	pid_t			new_pid;
+	pid_t			client_pid;
+	int				send_back;
+	int				i;
+};

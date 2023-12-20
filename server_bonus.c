@@ -1,44 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 19:31:10 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/20 15:57:50 by abablil          ###   ########.fr       */
+/*   Created: 2023/12/19 19:51:32 by abablil           #+#    #+#             */
+/*   Updated: 2023/12/20 16:00:34 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
-void	handle_signal(int signal, siginfo_t *info, void *context)
+void	update_values(struct s_info *info)
 {
-	static unsigned char	buff;
-	static pid_t			new_pid;
-	static pid_t			client_pid;
-	static int				i;
+	info->client_pid = info->new_pid;
+	info->send_back = 0;
+	info->buff = 0;
+	info->i = 0;
+}
+
+void	send_signal_back(pid_t client_pid, int *send_back)
+{
+	kill(client_pid, SIGUSR1);
+	*send_back = 1;
+}
+
+void	handle_signal(int signal, siginfo_t *siginfo, void *context)
+{
+	static struct s_info	info;
 
 	(void)context;
-	if (!client_pid)
-		client_pid = info->si_pid;
-	new_pid = info->si_pid;
-	if (new_pid != client_pid)
+	if (!info.client_pid)
+		info.client_pid = siginfo->si_pid;
+	info.new_pid = siginfo->si_pid;
+	if (info.new_pid != info.client_pid)
+		update_values(&info);
+	if (!info.send_back)
+		send_signal_back(info.new_pid, &info.send_back);
+	info.buff |= (signal == SIGUSR1);
+	info.i++;
+	if (info.i == 8)
 	{
-		client_pid = new_pid;
-		buff = 0;
-		i = 0;
-	}
-	buff |= (signal == SIGUSR1);
-	i++;
-	if (i == 8)
-	{
-		ft_printf("%c", buff);
-		i = 0;
-		buff = 0;
+		ft_printf("%c", info.buff);
+		info.i = 0;
+		info.buff = 0;
 	}
 	else
-		buff <<= 1;
+		info.buff <<= 1;
 }
 
 void	print_server(void)
