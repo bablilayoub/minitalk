@@ -2,6 +2,7 @@ NAME = minitalk
 CFLAGS = -Wall -Wextra -Werror
 LIBS = ./includes/ft_printf/libftprintf.a ./includes/libft/libft.a
 HEADER = minitalk.h
+BONUS_HEADER = minitalk_bonus.h
 CC = cc
 
 all: $(NAME)
@@ -24,12 +25,12 @@ server: server.c $(HEADER)
 	@$(CC) $(CFLAGS) server.c $(LIBS) -o server
 	@echo "Server is ready !"
 
-client_bonus: client_bonus.c $(HEADER)
+client_bonus: client_bonus.c $(BONUS_HEADER)
 	@echo "Making bonus client ..."
 	@$(CC) $(CFLAGS) client_bonus.c $(LIBS) -o client_bonus
 	@echo "Bonus client is ready !"
 
-server_bonus: server_bonus.c $(HEADER)
+server_bonus: server_bonus.c $(BONUS_HEADER)
 	@echo "Making bonus server ..."
 	@$(CC) $(CFLAGS) server_bonus.c $(LIBS) -o server_bonus
 	@echo "Bonus server is ready !"
