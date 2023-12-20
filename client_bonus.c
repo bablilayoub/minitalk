@@ -6,7 +6,7 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:51:25 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/20 17:58:49 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/20 21:01:41 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	send_signal(int pid, unsigned char character)
 			if (kill(pid, SIGUSR1) == -1)
 				send_error(faild);
 		}
-		usleep(100);
+		usleep(150);
 	}
 	return (1);
 }

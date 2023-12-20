@@ -15,22 +15,22 @@ comp_start:
 	@cd ./includes/libft && make
 	@cd ./includes/ft_printf && make
 
-client: client.c $(HEADER)
+client: comp_start client.c $(HEADER)
 	@echo "Making client ..."
 	@$(CC) $(CFLAGS) client.c $(LIBS) -o client
 	@echo "Client is ready !"
 
-server: server.c $(HEADER)
+server: comp_start server.c $(HEADER)
 	@echo "Making server ..."
 	@$(CC) $(CFLAGS) server.c $(LIBS) -o server
 	@echo "Server is ready !"
 
-client_bonus: client_bonus.c $(BONUS_HEADER)
+client_bonus: comp_start client_bonus.c $(BONUS_HEADER)
 	@echo "Making bonus client ..."
 	@$(CC) $(CFLAGS) client_bonus.c $(LIBS) -o client_bonus
 	@echo "Bonus client is ready !"
 
-server_bonus: server_bonus.c $(BONUS_HEADER)
+server_bonus: comp_start server_bonus.c $(BONUS_HEADER)
 	@echo "Making bonus server ..."
 	@$(CC) $(CFLAGS) server_bonus.c $(LIBS) -o server_bonus
 	@echo "Bonus server is ready !"
