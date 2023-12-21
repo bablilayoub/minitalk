@@ -6,7 +6,7 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:51:25 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/20 21:01:41 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/21 20:58:34 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,13 @@ int	send_signal(int pid, unsigned char character)
 	unsigned char	temp_char;
 	char			*faild;
 
-	i = 8;
+	i = 7;
 	temp_char = character;
-	faild = "\033[30m\033[101m ERROR \033[0m\033[97m Faild to send signal\n";
-	while (i > 0)
+	faild = "\033[30m\033[101m ERROR \033[0m\033[97m Failed to send signal\n";
+	while (i >= 0)
 	{
-		i--;
-		temp_char = character >> i;
-		if (temp_char % 2 == 0)
+		temp_char = (character >> i) & 1;
+		if (temp_char == 0)
 		{
 			if (kill(pid, SIGUSR2) == -1)
 				send_error(faild);
@@ -51,7 +50,8 @@ int	send_signal(int pid, unsigned char character)
 			if (kill(pid, SIGUSR1) == -1)
 				send_error(faild);
 		}
-		usleep(150);
+		usleep(250);
+		i--;
 	}
 	return (1);
 }
@@ -60,7 +60,7 @@ void	send_message(int sig)
 {
 	(void)sig;
 	print_client();
-	ft_printf("%s DONE %s Message recived from server\n", BG_GREEN, WHITE);
+	ft_printf("%s DONE %s Signal received from server\n", BG_GREEN, WHITE);
 }
 
 int	main(int total, char **args)
@@ -73,7 +73,7 @@ int	main(int total, char **args)
 		i = 0;
 		server_pid = ft_atoi(args[1]);
 		if (!server_pid)
-			send_error("\033[30m\033[101m ERROR \033[0m\033[97m Invalide PID");
+			send_error("\033[30m\033[101m ERROR \033[0m\033[97m Invalid PID");
 		signal(SIGUSR1, &send_message);
 		while (args[2][i])
 		{

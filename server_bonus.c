@@ -6,7 +6,7 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:51:32 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/20 21:08:19 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/21 20:59:40 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	handle_signal(int signal, siginfo_t *siginfo, void *context)
 		update_values(&info);
 	if (!info.send_back)
 		send_signal_back(info.new_pid, &info.send_back);
-	info.buff |= (signal == SIGUSR1);
+	info.buff = (info.buff << 1) + (signal == SIGUSR1);
 	info.i++;
 	if (info.i == 8)
 	{
@@ -46,8 +46,6 @@ void	handle_signal(int signal, siginfo_t *siginfo, void *context)
 		info.i = 0;
 		info.buff = 0;
 	}
-	else
-		info.buff <<= 1;
 }
 
 void	print_server(void)
@@ -57,7 +55,7 @@ void	print_server(void)
 	ft_printf("%s  \\__ \\/ __/ / /_/ / | / / __/ / /_/ /\n", LIGHT_BLUE);
 	ft_printf("%s ___/ / /___/ _, _/| |/ / /___/ _, _/ \n", LIGHT_BLUE);
 	ft_printf("%s/____/_____/_/ |_| |___/_____/_/ |_|  \n\n", LIGHT_BLUE);
-	ft_printf("%s RUNNING %s Server is listening at PID: %s %d \n%s",
+	ft_printf("%s RUNNING %s The server is listening at PID: %s %d \n%s",
 		BG_GREEN, WHITE, BG_GREEN, getpid(), WHITE);
 }
 
