@@ -6,7 +6,7 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:51:32 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/21 20:59:40 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/21 21:27:29 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ int	main(void)
 	action.sa_sigaction = &handle_signal;
 	action.sa_flags = SA_SIGINFO;
 	print_server();
-	sigaction(SIGUSR2, &action, NULL);
-	sigaction(SIGUSR1, &action, NULL);
+	if (sigaction(SIGUSR1, &action, NULL) == -1)
+		exit(EXIT_FAILURE);
+	if (sigaction(SIGUSR2, &action, NULL) == -1)
+		exit(EXIT_FAILURE);
 	while (1)
 		pause();
 	return (0);
