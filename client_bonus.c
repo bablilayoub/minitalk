@@ -6,7 +6,7 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:51:25 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/21 20:58:34 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/21 22:05:26 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	print_client(void)
 	ft_printf("%s\\____/_____/___/_____/_/ |_/ /_/     \n\n", GREEN);
 }
 
-int	send_error(char *str)
+int	send_error(char *type, char *str)
 {
 	print_client();
-	ft_printf("%s", str);
+	ft_printf("%s %s %s %s\n", BG_RED, type, WHITE, str);
 	exit(EXIT_FAILURE);
 }
 
@@ -32,23 +32,21 @@ int	send_signal(int pid, unsigned char character)
 {
 	int				i;
 	unsigned char	temp_char;
-	char			*faild;
 
 	i = 7;
 	temp_char = character;
-	faild = "\033[30m\033[101m ERROR \033[0m\033[97m Failed to send signal\n";
 	while (i >= 0)
 	{
 		temp_char = (character >> i) & 1;
 		if (temp_char == 0)
 		{
 			if (kill(pid, SIGUSR2) == -1)
-				send_error(faild);
+				send_error("ERROR", "Failed to send signal");
 		}
 		else
 		{
 			if (kill(pid, SIGUSR1) == -1)
-				send_error(faild);
+				send_error("ERROR", "Failed to send signal");
 		}
 		usleep(250);
 		i--;
@@ -60,7 +58,7 @@ void	send_message(int sig)
 {
 	(void)sig;
 	print_client();
-	ft_printf("%s DONE %s Signal received from server\n", BG_GREEN, WHITE);
+	ft_printf("%s DONE %s Signal received from the server\n", BG_GREEN, WHITE);
 }
 
 int	main(int total, char **args)
@@ -73,7 +71,9 @@ int	main(int total, char **args)
 		i = 0;
 		server_pid = ft_atoi(args[1]);
 		if (!server_pid)
-			send_error("\033[30m\033[101m ERROR \033[0m\033[97m Invalid PID");
+			send_error("ERROR", "Invalid PID");
+		if (!args[2][i])
+			send_error("ERROR", "Message can't be empty");
 		signal(SIGUSR1, &send_message);
 		while (args[2][i])
 		{
@@ -82,11 +82,6 @@ int	main(int total, char **args)
 		}
 	}
 	else
-	{
-		print_client();
-		ft_printf("%s USAGE %s ./client <server_PID> <message>\n",
-			BG_RED, WHITE);
-		exit(EXIT_FAILURE);
-	}
+		send_error("USAGE", "./client <server_PID> <message>");
 	return (0);
 }
