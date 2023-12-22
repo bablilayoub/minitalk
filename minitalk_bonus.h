@@ -6,7 +6,7 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 20:23:34 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/20 16:00:02 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/22 15:17:31 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,9 @@ struct	s_info
 	int				send_back;
 	int				i;
 };
+
+void	print_client(void);
+void	print_server(void);
+void	send_success(void);
+int		send_error_client(char *type, char *str);
+void	update_values(struct s_info *info);

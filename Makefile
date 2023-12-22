@@ -17,22 +17,22 @@ comp_start:
 
 client: comp_start client.c $(HEADER)
 	@echo "Making client ..."
-	@$(CC) $(CFLAGS) client.c $(LIBS) -o client
+	@$(CC) $(CFLAGS) client.c $(LIBS) utils.c -o client
 	@echo "Client is ready !"
 
 server: comp_start server.c $(HEADER)
 	@echo "Making server ..."
-	@$(CC) $(CFLAGS) server.c $(LIBS) -o server
+	@$(CC) $(CFLAGS) server.c $(LIBS) utils.c -o server
 	@echo "Server is ready !"
 
 client_bonus: comp_start client_bonus.c $(BONUS_HEADER)
 	@echo "Making bonus client ..."
-	@$(CC) $(CFLAGS) client_bonus.c $(LIBS) -o client_bonus
+	@$(CC) $(CFLAGS) client_bonus.c $(LIBS) utils_bonus.c -o client_bonus
 	@echo "Bonus client is ready !"
 
 server_bonus: comp_start server_bonus.c $(BONUS_HEADER)
 	@echo "Making bonus server ..."
-	@$(CC) $(CFLAGS) server_bonus.c $(LIBS) -o server_bonus
+	@$(CC) $(CFLAGS) server_bonus.c $(LIBS) utils_bonus.c -o server_bonus
 	@echo "Bonus server is ready !"
 
 bonus: comp_start client_bonus server_bonus

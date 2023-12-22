@@ -6,19 +6,11 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:51:32 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/21 21:27:29 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/22 15:17:10 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
-
-void	update_values(struct s_info *info)
-{
-	info->client_pid = info->new_pid;
-	info->send_back = 0;
-	info->buff = 0;
-	info->i = 0;
-}
 
 void	send_signal_back(pid_t client_pid, int *send_back)
 {
@@ -46,17 +38,6 @@ void	handle_signal(int signal, siginfo_t *siginfo, void *context)
 		info.i = 0;
 		info.buff = 0;
 	}
-}
-
-void	print_server(void)
-{
-	ft_printf("%s   _____ __________ _    ____________ \n", LIGHT_BLUE);
-	ft_printf("%s  / ___// ____/ __ \\ |  / / ____/ __ \\\n", LIGHT_BLUE);
-	ft_printf("%s  \\__ \\/ __/ / /_/ / | / / __/ / /_/ /\n", LIGHT_BLUE);
-	ft_printf("%s ___/ / /___/ _, _/| |/ / /___/ _, _/ \n", LIGHT_BLUE);
-	ft_printf("%s/____/_____/_/ |_| |___/_____/_/ |_|  \n\n", LIGHT_BLUE);
-	ft_printf("%s RUNNING %s The server is listening at PID: %s %d \n%s",
-		BG_GREEN, WHITE, BG_GREEN, getpid(), WHITE);
 }
 
 int	main(void)

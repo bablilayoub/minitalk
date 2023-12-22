@@ -6,7 +6,7 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 19:31:10 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/21 21:27:34 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/22 15:25:33 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,6 @@ void	handle_signal(int signal, siginfo_t *info, void *context)
 		i = 0;
 		buff = 0;
 	}
-}
-
-void	print_server(void)
-{
-	ft_printf("%s   _____ __________ _    ____________ \n", LIGHT_BLUE);
-	ft_printf("%s  / ___// ____/ __ \\ |  / / ____/ __ \\\n", LIGHT_BLUE);
-	ft_printf("%s  \\__ \\/ __/ / /_/ / | / / __/ / /_/ /\n", LIGHT_BLUE);
-	ft_printf("%s ___/ / /___/ _, _/| |/ / /___/ _, _/ \n", LIGHT_BLUE);
-	ft_printf("%s/____/_____/_/ |_| |___/_____/_/ |_|  \n\n", LIGHT_BLUE);
-	ft_printf("%s RUNNING %s The server is listening at PID: %s %d \n%s",
-		BG_GREEN, WHITE, BG_GREEN, getpid(), WHITE);
 }
 
 int	main(void)
