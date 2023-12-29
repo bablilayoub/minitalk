@@ -13,19 +13,19 @@ comp_start:
 	cd ./includes/libft && make
 	cd ./includes/ft_printf && make
 
-client: client.c $(HEADER)
-	$(CC) $(CFLAGS) client.c $(LIBS) utils.c -o client
+client: client.c utils.c $(HEADER)
+	$(CC) $(CFLAGS) client.c utils.c $(LIBS) -o client
 
-server: server.c $(HEADER)
-	$(CC) $(CFLAGS) server.c $(LIBS) utils.c -o server
+server: server.c utils.c $(HEADER)
+	$(CC) $(CFLAGS) server.c utils.c $(LIBS) -o server
 
-client_bonus: client_bonus.c $(BONUS_HEADER)
-	$(CC) $(CFLAGS) client_bonus.c $(LIBS) utils_bonus.c -o client_bonus
+client_bonus: client_bonus.c utils_bonus.c $(BONUS_HEADER)
+	$(CC) $(CFLAGS) client_bonus.c utils_bonus.c $(LIBS) -o client_bonus
 
-server_bonus: server_bonus.c $(BONUS_HEADER)
-	$(CC) $(CFLAGS) server_bonus.c $(LIBS) utils_bonus.c -o server_bonus
+server_bonus: server_bonus.c utils_bonus.c $(BONUS_HEADER)
+	$(CC) $(CFLAGS) server_bonus.c utils_bonus.c $(LIBS) -o server_bonus
 
-bonus: client_bonus server_bonus
+bonus: comp_start client_bonus server_bonus
 
 clean:
 	rm -f server client

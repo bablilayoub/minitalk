@@ -6,7 +6,7 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 20:23:34 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/29 14:37:59 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/29 15:41:03 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@
 #define BG_RED "\033[30m\033[101m"
 #define BG_GREEN "\033[30m\033[102m"
 #define BG_YELLOW "\033[30m\033[103m"
-
-struct	s_info
-{
-	char			buff;
-	pid_t			new_pid;
-	pid_t			client_pid;
-	int				i;
-};
 
 void	print_client(void);
 void	print_server(void);
