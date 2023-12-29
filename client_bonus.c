@@ -6,18 +6,16 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:51:25 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/22 15:21:17 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/29 15:28:51 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-int	g_can_print = 0;
-
-int	send_signal(int pid, unsigned char character)
+int	send_signal(int pid, char character)
 {
 	int				i;
-	unsigned char	temp_char;
+	char			temp_char;
 
 	i = 7;
 	temp_char = character;
@@ -43,7 +41,7 @@ int	send_signal(int pid, unsigned char character)
 void	handle_signal(int sig)
 {
 	(void)sig;
-	g_can_print = 1;
+	send_success();
 }
 
 int	main(int total, char **args)
@@ -65,8 +63,7 @@ int	main(int total, char **args)
 			send_signal(server_pid, args[2][i]);
 			i++;
 		}
-		if (g_can_print == 1)
-			send_success();
+		send_signal(server_pid, '\0');
 	}
 	else
 		send_error_client("USAGE", "./client <server_PID> <message>");

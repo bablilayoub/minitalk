@@ -6,7 +6,7 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:08:35 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/22 15:17:25 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/29 14:47:50 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,13 @@ void	print_server(void)
 	ft_printf("%s  \\__ \\/ __/ / /_/ / | / / __/ / /_/ /\n", LIGHT_BLUE);
 	ft_printf("%s ___/ / /___/ _, _/| |/ / /___/ _, _/ \n", LIGHT_BLUE);
 	ft_printf("%s/____/_____/_/ |_| |___/_____/_/ |_|  \n\n", LIGHT_BLUE);
-	ft_printf("%s RUNNING %s The server is listening at PID: %s %d \n%s",
-		BG_GREEN, WHITE, BG_GREEN, getpid(), WHITE);
+}
+
+void	send_error_server(char *type, char *str)
+{
+	print_server();
+	ft_printf("%s %s %s %s\n", BG_RED, type, WHITE, str);
+	exit(EXIT_FAILURE);
 }
 
 void	send_success(void)
@@ -39,17 +44,9 @@ void	send_success(void)
 		BG_GREEN, WHITE);
 }
 
-int	send_error_client(char *type, char *str)
+void	send_error_client(char *type, char *str)
 {
 	print_client();
 	ft_printf("%s %s %s %s\n", BG_RED, type, WHITE, str);
 	exit(EXIT_FAILURE);
-}
-
-void	update_values(struct s_info *info)
-{
-	info->client_pid = info->new_pid;
-	info->send_back = 0;
-	info->buff = 0;
-	info->i = 0;
 }

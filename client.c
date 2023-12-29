@@ -6,16 +6,16 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 19:30:59 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/22 15:21:12 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/29 15:00:31 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int	send_signal(int pid, unsigned char character)
+int	send_signal(int pid, char character)
 {
 	int				i;
-	unsigned char	temp_char;
+	char			temp_char;
 
 	i = 7;
 	temp_char = character;

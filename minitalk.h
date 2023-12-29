@@ -6,7 +6,7 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 17:23:22 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/22 15:14:46 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/29 14:50:13 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,4 @@
 void	print_client(void);
 void	print_server(void);
 void	send_success(void);
-int		send_error_client(char *type, char *str);
+void	send_error_client(char *type, char *str);

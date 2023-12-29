@@ -6,7 +6,7 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 19:31:10 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/22 15:25:33 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/29 14:58:47 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	handle_signal(int signal, siginfo_t *info, void *context)
 {
-	static unsigned char	buff;
-	static pid_t			new_pid;
-	static pid_t			client_pid;
-	static int				i;
+	static int		i = 0;
+	static char		buff = 0;
+	static pid_t	client_pid = 0;
+	pid_t			new_pid;
 
 	(void)context;
 	if (!client_pid)

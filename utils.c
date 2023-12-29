@@ -6,7 +6,7 @@
 /*   By: abablil <abablil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:08:35 by abablil           #+#    #+#             */
-/*   Updated: 2023/12/22 15:13:26 by abablil          ###   ########.fr       */
+/*   Updated: 2023/12/29 14:37:13 by abablil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	send_success(void)
 		BG_GREEN, WHITE);
 }
 
-int	send_error_client(char *type, char *str)
+void	send_error_client(char *type, char *str)
 {
 	print_client();
 	ft_printf("%s %s %s %s\n", BG_RED, type, WHITE, str);
